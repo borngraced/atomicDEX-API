@@ -26,6 +26,7 @@ pub mod utxo_common;
 pub mod utxo_standard;
 
 #[cfg(not(target_arch = "wasm32"))] pub mod tx_cache;
+pub mod message_signer;
 
 use async_trait::async_trait;
 use bigdecimal::BigDecimal;
