@@ -3107,6 +3107,7 @@ version = "0.1.0"
 dependencies = [
  "async-std",
  "async-trait",
+ "base64 0.10.1",
  "bigdecimal",
  "bitcoin-cash-slp",
  "bitcrypto",

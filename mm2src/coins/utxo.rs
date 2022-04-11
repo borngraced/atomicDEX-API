@@ -26,7 +26,6 @@ pub mod utxo_common;
 pub mod utxo_standard;
 
 #[cfg(not(target_arch = "wasm32"))] pub mod tx_cache;
-
 use async_trait::async_trait;
 use bigdecimal::BigDecimal;
 pub use bitcrypto::{dhash160, sha256, ChecksumType};

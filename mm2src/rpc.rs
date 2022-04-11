@@ -16,7 +16,6 @@
 //
 //  Copyright © 2014-2018 SuperNET. All rights reserved.
 //
-
 use crate::mm2::rpc::rate_limiter::RateLimitError;
 #[cfg(not(target_arch = "wasm32"))] use common::log::warn;
 use common::log::{error, info};
@@ -44,7 +43,9 @@ mod dispatcher_legacy;
 
 #[path = "rpc/get_public_key.rs"] mod get_public_key;
 #[path = "rpc/lp_commands.rs"] pub mod lp_commands;
-#[path = "rpc/lp_protocol.rs"] mod lp_protocol;
+#[path = "rpc/lp_protocol.rs"] pub mod lp_protocol;
+#[path = "rpc/lp_signatures.rs"] mod lp_signatures;
+
 use self::lp_protocol::{MmRpcBuilder, MmRpcResponse, MmRpcVersion};
 #[path = "rpc/rate_limiter.rs"] mod rate_limiter;
 

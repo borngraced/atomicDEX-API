@@ -103,6 +103,10 @@ serialization_derive = { path = "mm2src/mm2_bitcoin/serialization_derive" }
 sp-runtime-interface = { version = "3.0.0", default-features = false, features = ["disable_target_static_assertions"] }
 sp-trie = { version = "3.0", default-features = false }
 sql-builder = "3.1.1"
+secp256k1 = { version = "0.20" }
+base64 = "0.10.0"
+
+
 
 trie-db = { version = "0.22.6", default-features = false }
 trie-root = "0.16.0"
@@ -125,9 +129,11 @@ tokio = { version = "1.7", features = ["io-util", "rt-multi-thread", "net"] }
 bitcoin-cash-slp = "0.3.1"
 mocktopus = "0.7.0"
 rand6 = { version = "0.6", package = "rand" }
+
 secp256k1 = { version = "0.20", features = ["rand"] }
 testcontainers = { git = "https://github.com/artemii235/testcontainers-rs.git" }
 winapi = "0.3"
+
 
 [build-dependencies]
 chrono = "0.4"
