@@ -96,11 +96,6 @@ pub fn sign_message(ctx: &MmArc, req: Json) -> SignMessageRpcResult<SignMessageR
     //println!("sig {:?}", &sig,);
     let sig64 = base64::encode(&sig);
     //println!("sig {:?}", sig64,);
-
-    let data = json!({
-        "signature": sig64,
-    });
-
     Ok(SignMessageResponse{signature: sig64 })
 }
 
@@ -128,59 +123,54 @@ pub fn verify_message(ctx: &MmArc, req: Json) -> VerifyMessageRpcResult<VerifyMe
     };
     match verify {
         Ok(_) => {
-            let data = json!({
-                "is_valid": true,
-                "address": &address.display_address().unwrap().to_string(),
-                "pubKey": &&key_pair.public().to_string()
-            });
-          Ok(VerifyMessageResponse{ is_valid: true, address: &address.display_address().unwrap().to_string(), pubkey: &&key_pair.public().to_string() })
+          Ok(VerifyMessageResponse{ is_valid: true, address: address.display_address().unwrap().to_string(), pubkey: key_pair.public().to_string() })
         },
         Err(err) => return MmError::err(err.to_owned().to_string()).unwrap()
     }
 }
 
-#[test]
-fn signmessage_test() {
-    let payload = json!({
-      "userpass":"culture",
-      "method":"sign_message",
-      "mmrpc":"2.0",
-      "id": 0,
-      "params":{
-        "coin":"RICK",
-        "message":"test"
-      }
-    });
-    let keypair =
-        key_pair_from_seed("spice describe gravity federal blast come thank unfair canal monkey style afraid").unwrap();
+// #[test]
+// fn signmessage_test() {
+//     let payload = json!({
+//       "userpass":"culture",
+//       "method":"sign_message",
+//       "mmrpc":"2.0",
+//       "id": 0,
+//       "params":{
+//         "coin":"RICK",
+//         "message":"test"
+//       }
+//     });
+//     let keypair =
+//         key_pair_from_seed("spice describe gravity federal blast come thank unfair canal monkey style afraid").unwrap();
 
-    let mut ctx = MmCtxBuilder::default();
-    let ctx = ctx.with_secp256k1_key_pair(keypair);
-    let ctx = ctx.into_mm_arc();
-    let sign = sign_message(&ctx, payload);
-    let output = json::to_value(&sign).expect("Couldn't serialize MmRpcResponse");
-    println!("{:?}", output);
-}
-#[test]
-fn verifymessage_test() {
-    let payload = json!({
-      "userpass":"culture",
-      "method":"verify_message",
-      "mmrpc":"2.0",
-      "id": 0,
-      "params":{
-        "coin":"RICK",
-        "message":"test",
-        "signature": "lRnwxsSH5k07nbBlv10k/ZWD1N6F6L089Aozy2RwZxgbN4rUE2TMxVlRV/xnxgxia+rluch5Gr52vOwodifBKQ=="
-      }
-    });
-    let keypair =
-        key_pair_from_seed("spice describe gravity federal blast come thank unfair canal monkey style afraid").unwrap();
+//     let mut ctx = MmCtxBuilder::default();
+//     let ctx = ctx.with_secp256k1_key_pair(keypair);
+//     let ctx = ctx.into_mm_arc();
+//     let sign = sign_message(&ctx, payload);
+//     let output = json::to_value(&sign).expect("Couldn't serialize MmRpcResponse");
+//     println!("{:?}", output);
+// }
+// #[test]
+// fn verifymessage_test() {
+//     let payload = json!({
+//       "userpass":"culture",
+//       "method":"verify_message",
+//       "mmrpc":"2.0",
+//       "id": 0,
+//       "params":{
+//         "coin":"RICK",
+//         "message":"test",
+//         "signature": "lRnwxsSH5k07nbBlv10k/ZWD1N6F6L089Aozy2RwZxgbN4rUE2TMxVlRV/xnxgxia+rluch5Gr52vOwodifBKQ=="
+//       }
+//     });
+//     let keypair =
+//         key_pair_from_seed("spice describe gravity federal blast come thank unfair canal monkey style afraid").unwrap();
 
-    let mut ctx = MmCtxBuilder::default();
-    let ctx = ctx.with_secp256k1_key_pair(keypair);
-    let ctx = ctx.into_mm_arc();
-    let verify = verify_message(&ctx, payload);
-    let output = json::to_value(&verify).expect("Couldn't serialize MmRpcResponse");
-    println!("{:?}", output);
-}
+//     let mut ctx = MmCtxBuilder::default();
+//     let ctx = ctx.with_secp256k1_key_pair(keypair);
+//     let ctx = ctx.into_mm_arc();
+//     let verify = verify_message(&ctx, payload);
+//     let output = json::to_value(&verify).expect("Couldn't serialize MmRpcResponse");
+//     println!("{:?}", output);
+// }
