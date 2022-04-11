@@ -23,7 +23,7 @@ lazy_static! {
 }
 
 #[derive(Display, Serialize, SerializeErrorType)]
-#[serde(tag = "error_type", content = "error_data")]
+#[serde(tag = "error_type", content ="error_data")]
 pub enum SignMessageRequestError {
     #[display(fmt = "Unable to sign message please confirm your credentials")]
     Internal { message: String },
